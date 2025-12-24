@@ -1,5 +1,5 @@
 Simple, low power, low (but readable) resolution, non-invasive screen recorder for all 
-the moments you wish you had saved. 
+the moments you wish you had saved.
 
 This is the customizable, open-source release, please go to the link below if you
 would like the "plug-n-play" .exe experience.
@@ -9,7 +9,7 @@ would like the "plug-n-play" .exe experience.
 Minimum Requirements:
 - Any Quad-core CPU (Intel i5-4xxx or newer, Ryzen 3 or better. Dual-cores 
   over 2.0 Ghz should work, don't expect perfection)
-- 4GB Ram (App stays under 70MB)
+- 4GB Ram (App stays under 110MB)
 - Any HDD or SSD (Disk Usage Stats are at the bottom of this file)
 - Windows 10 / 11
 - Python, Microsoft Visual C++ Runtime
@@ -23,7 +23,7 @@ Instructions:
 3. Once you are in the extracted folder, the first thing you should do is open the   
    "dependencies.bat" file, which will obviously install the dependencies 
    needed for this recorder to work (you should also do this everytime you install an 
-   update). I have a section below on all the dependencies functions.
+   update). I have a section below on all the dependencies functions. You have to download Python if you do not have it, I did not make this a dependecy, as some coders like to use older versions of Python
 
 4. All there is to do now is launch the script, by right-clicking it, and opening it
     with Python (terminal options are below), and setting your directory for your recordings 
@@ -34,7 +34,7 @@ Instructions:
     4a. Opening with terminal is easy as right clicking the folder the script is in,
     clicking "Open in Terminal", and pasting this line of code;
     
-    "python FrameKeepOSStable.py"
+    "python FrameKeepOSv1.1-stable.py"
 
     You can also open any terminal instance, type; 
     
@@ -42,19 +42,13 @@ Instructions:
 
     Following with the same line earlier;
 
-    "python FrameKeepOSStable.py"
+    "python FrameKeepOSv1.1-stable.py"
 
 5. Click the arrow to the very left inside your icon tray (at the bottom right), 
-    drag the FrameKeepOS icon down to the tray for effeciency, and right click to stop,start, 
-    or pause your recording of the past hour!
+    drag the FrameKeepOS icon down to the tray for effeciency, and right click to stop,start, or pause your recording of the past hour!
 
 Remember, at 5FPS, videos will be around 51 minutes long, not 60. The past hour is
 still whats in your file
-
-Intended Future Fixes:
-
-I am currently working on some way to hide the console on the open-source and .exe
-versions.
 
 Customization:
 To start customizing how FrameKeep works, go to it's configuration directory;
@@ -70,15 +64,26 @@ Open the config.json file with Notepad++ (or whatever you use).
 - To change how much FrameKeep downscales your recording to save size, change the
   parameter under "downscale_factor" to whatever factor you desire, the default is 0.5
   (This gives 1080p monitors a 540p recording, 1440p gets 720p, 2160p[4k] gets 1080p)
+- To change which codec FrameKeep records in, change the parameter under "codec" to either
+  "H264" for H.264, or "MJPG" for MJPG
+
+Codec Fallback Order: H.264 → MJPG
 
 Make sure to save all changes!
 
-Average Disk Usage Statistics - 1080p (downscaled 0.5x to 540p) @ 5FPS:
-- Average Disk Usage/s ≈ 0.24 MB/s
-- Average Disk Usage/hr ≈ 850 MB/hr
-- Average Disk Usage/24hr ≈ 20.4 GB/24hr
-- Average Disk Usage/week ≈ 143 GB/week
-- Average Disk Usage/month ≈ 610 GB/month
+Average Disk Usage Statistics - H.264 1080p (downscaled 0.5x to 540p) @ 5FPS:
+- Average Disk Usage/s ≈ 0.06 MB/s
+- Average Disk Usage/hr ≈ 235 MB/hr
+- Average Disk Usage/24hr ≈ 5.64 GB/24hr
+- Average Disk Usage/week ≈ 39.5 GB/week
+- Average Disk Usage/month ≈ 169.2 GB/month
+
+Average Disk Usage Statistics - MJPG 1080p (downscaled 0.5x to 540p) @ 5FPS:
+- Average Disk Usage/s ≈ 0.25 MB/s
+- Average Disk Usage/hr ≈ 905 MB/hr
+- Average Disk Usage/24hr ≈ 21.7 GB/24hr
+- Average Disk Usage/week ≈ 152 GB/week
+- Average Disk Usage/month ≈ 652 GB/month
 
 Dependencies explained:
 - Python. This is the language FrameKeepOS is written in. The open-source version of 
@@ -111,3 +116,6 @@ Dependencies explained:
 - .NET Bridge (pythonnet) allows Python to talk to Windows’ built-in systems more 
   cleanly. This improves compatibility and stability on Windows and allows future 
   improvements without hacks.
+
+- openh264-1.8.0-win64.dll gives you access to the open-source H.264 codec, to run this
+  application using ~75% less storage space, and ~23% less RAM than MJPG

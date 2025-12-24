@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import time
 import datetime
@@ -13,8 +14,6 @@ import mss
 import pystray
 from pystray import MenuItem as item
 from PIL import Image, ImageDraw
-import ctypes
-import sys
 
 # ================= APP / CONFIG =================
 APP_NAME = "FrameKeepOS"
@@ -23,6 +22,9 @@ APPDATA_DIR = os.path.join(os.getenv("APPDATA"), APP_NAME)
 os.makedirs(APPDATA_DIR, exist_ok=True)
 
 CONFIG_FILE = os.path.join(APPDATA_DIR, "config.json")
+
+if getattr(sys, 'frozen', False):
+    os.add_dll_directory(sys._MEIPASS)
 
 FPS = 5
 DOWNSCALE_FACTOR = 0.5
@@ -40,8 +42,11 @@ state = {
 def load_config():
     if os.path.exists(CONFIG_FILE):
         with open(CONFIG_FILE, "r") as f:
-            return json.load(f)
-    return None
+            cfg = json.load(f)
+    else:
+        cfg = None
+
+    return cfg
 
 def save_config(cfg):
     with open(CONFIG_FILE, "w") as f:
@@ -63,24 +68,27 @@ def get_today_folder(root):
 
 def get_chunk_filename(folder):
     now = datetime.datetime.now()
-    return os.path.join(
-        folder,
-        now.strftime("%H-%M-%S.mkv")
-    )
+    return os.path.join(folder, now.strftime("%H-%M-%S.mkv"))
 
 # ---------- RECORDER THREAD ----------
 def recorder_loop():
     cfg = load_config()
+
     if cfg is None:
         folder = pick_log_directory()
         cfg = {
             "log_root": folder,
             "fps": FPS,
-            "downscale_factor": DOWNSCALE_FACTOR
+            "downscale_factor": DOWNSCALE_FACTOR,
+            "codec": "H264"  # DEFAULT
         }
         save_config(cfg)
     else:
         folder = cfg["log_root"]
+        cfg.setdefault("codec", "H264")
+        save_config(cfg)
+
+    codec_choice = cfg["codec"].upper()
 
     with mss.mss() as sct:
         monitor = sct.monitors[1]
@@ -88,15 +96,28 @@ def recorder_loop():
         sw, sh = monitor["width"], monitor["height"]
         tw, th = int(sw * DOWNSCALE_FACTOR), int(sh * DOWNSCALE_FACTOR)
 
-        fourcc = cv2.VideoWriter_fourcc(*"MJPG")
+        # ---------- CODEC SELECTION ----------
+        if codec_choice == "H264":
+            fourcc = cv2.VideoWriter_fourcc(*"H264")
+            test_path = os.path.join(folder, "codec_test.mkv")
+            test_writer = cv2.VideoWriter(test_path, fourcc, FPS, (tw, th))
+
+            if not test_writer.isOpened():
+                print("[WARN] H.264 unavailable, falling back to MJPG.")
+                fourcc = cv2.VideoWriter_fourcc(*"MJPG")
+
+            test_writer.release()
+            if os.path.exists(test_path):
+                os.remove(test_path)
+
+        else:
+            fourcc = cv2.VideoWriter_fourcc(*"MJPG")
 
         out = None
         chunk_start = None
-        current_day_folder = None
 
         while state["running"]:
 
-            # Stop behavior: finalize file immediately
             if state["force_new_file"]:
                 if out:
                     out.release()
@@ -109,8 +130,8 @@ def recorder_loop():
                 continue
 
             if out is None:
-                current_day_folder = get_today_folder(folder)
-                file_path = get_chunk_filename(current_day_folder)
+                day_folder = get_today_folder(folder)
+                file_path = get_chunk_filename(day_folder)
                 out = cv2.VideoWriter(file_path, fourcc, FPS, (tw, th))
                 chunk_start = time.time()
                 print(f"[RECORDING] {file_path}")
@@ -163,7 +184,7 @@ def quit_app(icon, _):
     state["running"] = False
     icon.stop()
 
-# ---------- MENU BUILD ----------
+# ---------- MENU ----------
 def build_menu():
     return pystray.Menu(
         item("Start Recording", start_recording,
@@ -177,12 +198,7 @@ def build_menu():
     )
 
 def tray_loop():
-    icon = pystray.Icon(
-        "FrameKeepOS",
-        get_icon(),
-        "FrameKeepOS",
-        build_menu()
-    )
+    icon = pystray.Icon("FrameKeepOS", get_icon(), "FrameKeepOS", build_menu())
     icon.run()
 
 # ---------- MAIN ----------
