@@ -26,9 +26,10 @@ Instructions:
    update). I have a section below on all the dependencies functions.
 
 4. All there is to do now is launch the script, by right-clicking it, and opening it
-    with Python (terminal options are below), and setting your directory for your recordings (I recommend setting the FrameKeep repo folder where you want it, 
-    and just set your recordings to the FrameKeep folder. It was just easier for 
-    me to keep files together this way)
+    with Python (terminal options are below), and setting your directory for your recordings 
+    (I recommend setting the FrameKeep repo folder where you want it, and just set your 
+    recordings to the FrameKeep folder. It was just easier for me to keep files together 
+    this way)
 
     4a. Opening with terminal is easy as right clicking the script the folder is in,
     clicking "Open in Terminal", and pasting this line of code;
@@ -44,7 +45,8 @@ Instructions:
     "python FrameKeepOSStable.py"
 
 5. Click the arrow to the very left inside your icon tray (at the bottom right), 
-    drag the FrameKeepOS icon down to the tray for effeciency, and right click to stop,start, or pause your recording of the past hour!
+    drag the FrameKeepOS icon down to the tray for effeciency, and right click to stop,start, 
+    or pause your recording of the past hour!
 
 Remember, at 5FPS, videos will be around 51 minutes long, not 60. The past hour is
 still whats in your file
@@ -60,6 +62,7 @@ To start customizing how FrameKeep works, go to it's configuration directory;
 C:\Users\you\AppData\Roaming\FrameKeepOS\config.json
 
 Open the config.json file with Notepad++ (or whatever you use).
+
 - To change the recording directory, replace the path parameter under "log_root". 
   Make sure the quotation marks around the path are still there
 - To change what fps FrameKeep records at, change the "fps" parameter to whatever
