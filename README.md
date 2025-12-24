@@ -117,5 +117,5 @@ Dependencies explained:
   cleanly. This improves compatibility and stability on Windows and allows future 
   improvements without hacks.
 
-- openh264-1.8.0-win64.dll gives you access to the open-source H.264 codec, to run this
-  application using ~75% less storage space, and ~23% less RAM than MJPG
+- openh264-1.8.0-win64.dll gives you access to the open-source H.264 codec by Cisco, to run  
+  this application using ~75% less storage space, and ~23% less RAM than MJPG
