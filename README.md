@@ -31,7 +31,7 @@ Instructions:
     recordings to the FrameKeep folder. It was just easier for me to keep files together 
     this way)
 
-    4a. Opening with terminal is easy as right clicking the script the folder is in,
+    4a. Opening with terminal is easy as right clicking the folder the script is in,
     clicking "Open in Terminal", and pasting this line of code;
     
     "python FrameKeepOSStable.py"
