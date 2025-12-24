@@ -12,7 +12,7 @@ Minimum Requirements:
 - 4GB Ram (App stays under 70MB)
 - Any HDD or SSD (Disk Usage Stats are at the bottom of this file)
 - Windows 10 / 11
-- Python must be installed prior
+- Python, Microsoft Visual C++ Runtime
 
 Instructions:
 
