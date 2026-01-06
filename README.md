@@ -1,17 +1,12 @@
-FrameKeep - (C) 2025 Tanner Lucier
-Licensed under GPLv3 - see LICENSE file for details
+#### FrameKeep - (C) 2025 Tanner Lucier
 
-Simple, low power, low (but readable) resolution, non-invasive screen recorder for all 
-the moments you wish you had saved.
+###### Licensed under GPLv3 - see LICENSE file for details
 
-This is the customizable, open-source release, please go to the link below if you
-would like the "plug-n-play" .exe experience.
+##### Simple, low power, low (but readable) resolution, non-invasive screen recorder for all the moments you wish you had saved.
 
-*the plug-n-play version is not out yet, I would like to do most of what I wish inside the open source prior to plug-n-play release*
+#
 
-==================================================================================================================================
-
-Minimum Requirements:
+### Minimum Requirements:
 - Any Quad-core CPU (Intel i5-4xxx or newer, Ryzen 3 or better. Dual-cores 
   over 2.0 Ghz should work, don't expect perfection)
 - 4GB Ram (App stays under 110MB)
@@ -19,9 +14,9 @@ Minimum Requirements:
 - Windows 10 / 11
 - Python, Microsoft Visual C++ Runtime
 
-==================================================================================================================================
+#
 
-Instructions:
+### Instructions:
 
 1. Open this repo, and download it's .zip file, Main Repo Screen > Code > Download Zip
 
@@ -41,7 +36,7 @@ Instructions:
     4a. Opening with terminal is easy as right clicking the folder the script is in,
     clicking "Open in Terminal", and pasting this line of code;
     
-    "python FrameKeepOSv2.0.0-stable.py"
+    "python FrameKeepOSv2.1.0-stable.py"
 
     You can also open any terminal instance, type; 
     
@@ -49,16 +44,16 @@ Instructions:
 
     Following with the same line earlier;
 
-    "python FrameKeepOSv2.0.0-stable.py"
+    "python FrameKeepOSv2.1.0-stable.py"
 
 5. Click the arrow to the very left inside your icon tray (at the bottom right), 
     drag the FrameKeepOS icon down to the tray for effeciency, and right click to stop, start, or pause your recording of the past hour!
 
 Remember, at 5FPS, videos will not be 60 minutes long. The past hour is still whats in your file
 
-==================================================================================================================================
+#
 
-Customization:
+### Customization:
 To start customizing how FrameKeep works, go to it's configuration directory;
 
 C:\Users\you\AppData\Roaming\FrameKeepOS\config.json
@@ -68,7 +63,7 @@ Open the config.json file with Notepad++ (or whatever you use).
 - To change the recording directory, replace the path parameter under "log_root". 
 Make sure the quotation marks around the path are still there.
 - To change what fps FrameKeep records at, change the "fps" parameter to whatever
-FPS you desire.
+FPS you desire, no quotations.
 - To change how much FrameKeep downscales your recording to save size, change the
 parameter under "downscale_factor" to whatever factor you desire, the default is 0.5
 (This gives 1080p monitors a 540p recording, 1440p gets 720p, 2160p[4k] gets 1080p).
@@ -81,28 +76,28 @@ Codec Fallback Order: H.264 → MJPG
 
 Make sure to save all changes, and restart the script!
 
-==================================================================================================================================
+#
 
 Average Disk Usage Statistics - H.264 1080p downscaled 0.5x to 540p @ 5FPS w/ CRF(23) MP4 Conversion, 1 Monitor:
-- Average Disk Usage/s ≈ 31 KB/s
-- Average Disk Usage/hr ≈ 110 MB/hr
-- Average Disk Usage/24hr ≈ 2.57 GB/24hr
-- Average Disk Usage/week ≈ 18 GB/week
-- Average Disk Usage/month ≈ 77 GB/month
+- Average Disk Usage/s ≈ 32.3 KB/s
+- Average Disk Usage/hr ≈ 116.35 MB/hr
+- Average Disk Usage/24hr ≈ 2.8 GB/24hr
+- Average Disk Usage/week ≈ 19.55 GB/week
+- Average Disk Usage/month ≈ 78.2 GB/month
 
 Average Disk Usage Statistics - H.264 1080p downscaled 0.5x to 540p @ 5FPS, 1 Monitor:
-- Average Disk Usage/s ≈ 41 KB/s
-- Average Disk Usage/hr ≈ 145 MB/hr
-- Average Disk Usage/24hr ≈ 3.41 GB/24hr
-- Average Disk Usage/week ≈ 23.9 GB/week
-- Average Disk Usage/month ≈ 102 GB/month
+- Average Disk Usage/s ≈ 45.5 KB/s
+- Average Disk Usage/hr ≈ 164 MB/hr
+- Average Disk Usage/24hr ≈ 3.93 GB/24hr
+- Average Disk Usage/week ≈ 27.5 GB/week
+- Average Disk Usage/month ≈ 110 GB/month
 
 Average Disk Usage Statistics - H.264 1080p downscaled 0.5x to 540p @ 5FPS MP4 Conversion NO CRF, 1 Monitor:
-- Average Disk Usage/s ≈ 47 KB/s
-- Average Disk Usage/hr ≈ 167 MB/hr
-- Average Disk Usage/24hr ≈ 3.91 GB/24hr
-- Average Disk Usage/week ≈ 27.4 GB/week
-- Average Disk Usage/month ≈ 117 GB/month
+- Average Disk Usage/s ≈ 52 KB/s
+- Average Disk Usage/hr ≈ 186 MB/hr
+- Average Disk Usage/24hr ≈ 4.5 GB/24hr
+- Average Disk Usage/week ≈ 31.25 GB/week
+- Average Disk Usage/month ≈ 126 GB/month
 
 Average Disk Usage Statistics - MJPG 1080p downscaled 0.5x to 540p @ 5FPS, 1 Monitor:
 - Average Disk Usage/s ≈ 0.25 MB/s
@@ -116,16 +111,16 @@ INTEL i5-12600K
 32GB DDR5 6000MHz
 NVME SSD
 
-==================================================================================================================================
+#
 
-FAQ
+### FAQ
 
 Q: Why has the .mkv → .mp4 conversion failed if I haven't changed anything?
 A: Make sure all dependencies are installed, and ffmpeg.exe is trusted by your computer (if you double click it, it may say it is unknown program or try to flag it. If not check in your Windows Security settings), ffmpeg must be trusted in order for conversion to work. Also make sure in the configuration file that convert_to_mp4 is set to true. If neither of these work, post an issue on the Github page with any errors you get and I will *hopefully* help you.
 
-==================================================================================================================================
+# 
 
-Dependencies explained:
+### Dependencies explained:
 - Python. This is the language FrameKeepOS is written in. The open-source version of 
   FrameKeepOS needs Python the same way a Word document needs Microsoft Word. If you 
   are using the EXE version, Python is already included and you don’t need to install 
@@ -162,8 +157,8 @@ Dependencies explained:
 - Cisco's OpenH264, FrameKeep uses OpenCV for screen capture and video encoding. When H.264 is selected, OpenCV relies on Cisco OpenH264 to provide the H.264 encoder backend. If the OpenH264 library is available, FrameKeepOS records H.264 video into MKV files directly through OpenCV.
 If OpenH264 cannot be loaded, the recorder automatically falls back to MJPG encoding. OpenH264 is only used for live recording, not for file conversion.
 
-==================================================================================================================================
-Third-Party Software
+#
+### Third-Party Software
 
 This project uses FFmpeg (GPLv3). FFmpeg is not part of this project’s code. 
 See LICENSE_FFMPEG for details.
